@@ -22,10 +22,17 @@ COPY ./requirements.txt /app/requirements.txt
 RUN pip3 install -r requirements.txt
 
 # install jax[cuda]
-RUN pip3 install --upgrade "jax[cuda]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+# RUN pip3 install --upgrade "jax[cuda]" -f https://storage.googleapis.com/jax-releases/jax_releases.html
+RUN pip install "jax[cuda11_cudnn82]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+# RUN pip3 list | grep "jax"
+# RUN pip3 install --upgrade "jax[cuda]">=0.3
+# RUN pip3 install --upgrade jaxlib>=0.3.10
+# RUN pip3 install --upgrade "jax[cuda]" -f https://storage.googleapis.com/jax-releases/jax_releases.html
+# RUN pip install https://storage.googleapis.com/jax-releases/nocuda/jaxlib-0.3.10-cp38-none-manylinux2014_x86_64.whl
+# RUN pip install --upgrade https://storage.googleapis.com/jax-releases/cuda11/jaxlib-0.3.10+cuda11.cudnn82-cp38-none-manylinux2014_x86_64.whl
 
 # add source code
 COPY . /app
 
 # run server
-CMD python3 app.py --port 8080 --model_version mini
+CMD python3 app.py --port 3010 --model_version mini
